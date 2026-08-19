@@ -8,6 +8,12 @@ import SampleSix from './components/practices/basic/SampleSix.vue'
 import SampleSeven from './components/practices/basic/SampleSeven.vue'
 import SampleEight from './components/practices/basic/SampleEight.vue'
 import SampleNine from './components/practices/basic/SampleNine.vue'
+import SampleTen from './components/practices/basic/SampleTen.vue'
+import SampleEleven from './components/practices/basic/SampleEleven.vue'
+import SampleTwelve from './components/practices/basic/SampleTwelve.vue'
+import SampleThirteen from './components/practices/basic/SampleThirteen.vue'
+
+import WeatherMockup from './components/practices/basic/WeatherMockup.vue'
 </script>
 <template>
   <div style="padding: 20px">
@@ -36,5 +42,23 @@ import SampleNine from './components/practices/basic/SampleNine.vue'
     <br />
 
     <SampleNine />
+    <br />
+
+    <SampleTen />
+    <br />
+
+    <SampleTwelve />
+    <br />
+
+    <SampleEleven />
+    <br />
+
+    <SampleTwelve />
+    <br />
+
+    <SampleThirteen />
+    <br />
+
+    <WeatherMockup />
   </div>
 </template>
