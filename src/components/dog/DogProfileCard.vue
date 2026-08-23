@@ -63,6 +63,7 @@ const { name, size, lifeStage, sizeLabel, lifeStageLabel } = storeToRefs(dogProf
 .card-heading strong {
   color: #4d3c34;
   font-size: 17px;
+  font-weight: 900;
 }
 
 .card-heading p {

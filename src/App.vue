@@ -1,8 +1,8 @@
 <script setup>
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import UnitToggler from '@/components/exercise/UnitToggler.vue'
-import ThemeToggler from '@/components/exercise/ThemeToggler.vue'
+import UnitToggler from '@/components/common/UnitToggler.vue'
+import ThemeToggler from '@/components/common/ThemeToggler.vue'
 import { useConfigStore } from '@/stores/configStore'
 
 const configStore = useConfigStore()

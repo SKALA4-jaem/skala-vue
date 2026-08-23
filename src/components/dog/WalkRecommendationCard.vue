@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useDogProfileStore } from '@/stores/dogProfileStore'
+import { calculateWalkScore } from '@/utils/walkScore'
 
 const props = defineProps({
   weather: {
@@ -23,23 +24,11 @@ const maxRainProbability = computed(() => {
 })
 
 const walkScore = computed(() => {
-  let score = 100
-  const temperature = props.weather.feelsLike ?? props.weather.temp
-
-  if (temperature >= 30) score -= 35
-  else if (temperature >= 26) score -= 15
-  else if (temperature <= 0) score -= 30
-  else if (temperature <= 8) score -= 15
-
-  if (props.weather.humidity >= 80) score -= 10
-  if (props.weather.wind >= 8) score -= 15
-  if (props.weather.airQualityIndex >= 4) score -= 30
-  else if (props.weather.airQualityIndex === 3) score -= 15
-  if (maxRainProbability.value >= 0.6) score -= 25
-  if (lifeStage.value === 'senior') score -= 10
-  if (lifeStage.value === 'puppy') score -= 5
-
-  return Math.max(0, score)
+  return calculateWalkScore({
+    weather: props.weather,
+    rainProbability: maxRainProbability.value,
+    lifeStage: lifeStage.value,
+  })
 })
 
 const scoreStatus = computed(() => {
