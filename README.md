@@ -1,44 +1,226 @@
-# skala-vue
+# 산책할개
 
-This template should help get you started developing with Vue 3 in Vite.
+> 지역별 실시간 날씨를 확인하고 반려견과 산책하기 좋은 시간을 추천받는 견주용 날씨 서비스
 
-## Recommended IDE Setup
+산책할개는 단순히 기온만 보여주는 날씨 앱이 아닙니다. 기온, 체감온도, 습도, 풍속, 비 올 확률과 미세먼지를 함께 확인하고, 반려견의 크기와 나이대를 반영한 **멍산책 지수**로 산책하기 좋은 날씨인지 쉽게 판단할 수 있도록 만들었습니다.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 배포 주소
 
-## Recommended Browser Setup
+[산책할개 바로가기](https://skala-3o9is70un-jeam2.vercel.app/)
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## 주요 기능
 
-## Customize configuration
+### 지역별 실시간 날씨
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- 전국 17개 주요 지역의 실시간 날씨 제공
+- 현재 기온, 날씨 상태, 날씨 아이콘, 비 올 확률 표시
+- 지역명과 한글 초성을 이용한 검색 지원
+- 즐겨찾기한 지역을 목록의 가장 위에 표시
 
-## Project Setup
+### 반려견 맞춤 산책 추천
 
-```sh
+- 반려견 이름, 크기, 나이대 설정
+- 기온과 강수 확률을 반영한 지역별 멍산책 지수 제공
+- 상세 화면에서는 체감온도, 습도, 풍속, 미세먼지까지 반영
+- 날씨와 반려견 정보에 맞는 산책 시간과 준비사항 안내
+
+### 상세 날씨 예보
+
+- 현재 기온과 체감온도
+- 습도와 풍속
+- 미세먼지(PM10)와 대기질 단계
+- 가로 스크롤 방식의 1시간 단위 예보
+- 오늘부터 5일간의 최저·최고 기온과 강수 확률
+
+### 편의 기능
+
+- 섭씨·화씨 단위 변경
+- 낮 산책·밤 산책 화면 모드
+- 랜덤 강아지 사진과 한국어 강아지 상식
+- 잘못된 주소로 접근했을 때 Not Found 화면 제공
+- 수업에서 작성한 예제를 확인할 수 있는 학습 자료실
+
+## 기술 스택
+
+| 기술         | 프로젝트에서 사용한 부분                                                                                     |
+| ------------ | ------------------------------------------------------------------------------------------------------------ |
+| Vue 3        | Composition API와 컴포넌트 기반으로 화면과 상태를 구성했습니다.                                              |
+| Vue Router   | 메인, 상세, 서비스 소개, 학습 자료실 페이지를 연결하고 동적 경로, 지연 로딩, Catch-all Route를 적용했습니다. |
+| Pinia        | 온도 단위, 화면 모드, 반려견 프로필, 지역 즐겨찾기 상태를 관리했습니다.                                      |
+| Axios        | 날씨, 예보, 대기질, 강아지 사진과 상식 등 외부 API 요청에 사용했습니다.                                      |
+| Element Plus | 카드, 입력창, 선택창, 알림, 진행률 등 공통 UI를 구현했습니다.                                                |
+| Vite         | Vue 프로젝트의 개발 서버와 production build를 구성했습니다.                                                  |
+| Vercel       | GitHub 저장소와 연동하여 웹서비스를 배포했습니다.                                                            |
+
+## 사용 API
+
+| API                             | 사용 목적                                         |
+| ------------------------------- | ------------------------------------------------- |
+| OpenWeather Current Weather API | 지역별 현재 날씨, 기온, 체감온도, 습도, 풍속 조회 |
+| OpenWeather 5 Day Forecast API  | 지역별 강수 확률과 단기 예보 조회                 |
+| OpenWeather Air Pollution API   | PM10 미세먼지와 대기질 단계 조회                  |
+| Open-Meteo Forecast API         | 1시간 단위 예보와 5일간의 일별 예보 조회          |
+| Dog CEO API                     | 랜덤 강아지 사진 조회                             |
+| Dog API                         | 랜덤 강아지 상식 조회                             |
+| MyMemory Translation API        | 영어로 받은 강아지 상식을 한국어로 번역           |
+
+## 데이터 흐름
+
+```text
+지역 선택
+   ↓
+날씨 API 요청
+   ↓
+현재 날씨 · 시간별 예보 · 대기질 데이터 가공
+   ↓
+Pinia에 저장된 반려견 정보와 화면 설정 확인
+   ↓
+멍산책 지수 · 추천 시간 · 산책 준비사항 계산
+   ↓
+날씨 카드와 상세 화면에 출력
+```
+
+## 페이지 구성
+
+| 경로               | 화면          | 설명                                                                              |
+| ------------------ | ------------- | --------------------------------------------------------------------------------- |
+| `/`                | 날씨 대시보드 | 반려견 프로필, 지역 검색, 즐겨찾기, 지역별 실시간 날씨를 표시합니다.              |
+| `/weather/:cityId` | 날씨 상세     | 선택한 지역의 현재 날씨, 멍산책 지수, 시간별·5일 예보와 강아지 상식을 표시합니다. |
+| `/about`           | 서비스 소개   | 서비스의 목적, 주요 기능, 기술 스택과 사용 API를 소개합니다.                      |
+| `/study`           | 학습 자료실   | Vue 수업에서 작성한 실습 과제와 코드 챌린지를 정리합니다.                         |
+| `/:pathMatch(.*)*` | Not Found     | 정의되지 않은 주소로 접근했을 때 안내 화면을 표시합니다.                          |
+
+## 프로젝트 구조
+
+```text
+src/
+├── assets/                  # 전역 스타일과 서비스 이미지
+├── components/
+│   ├── common/             # 여러 화면에서 사용하는 공통 UI
+│   ├── dog/                # 반려견 프로필, 산책 추천, 강아지 상식
+│   ├── weather/            # 현재 날씨, 지역 카드, 시간별·일별 예보
+│   └── practices/          # 수업 실습과 코드 챌린지
+├── data/
+│   └── weatherRegions.js   # 지역 이름과 API 요청용 도시 정보
+├── router/
+│   └── index.js            # 페이지 경로와 지연 로딩 설정
+├── services/               # Axios 인스턴스와 외부 API 요청 함수
+├── stores/                 # Pinia 전역 상태
+├── utils/
+│   └── walkScore.js        # 공통 멍산책 지수 계산 함수
+├── views/                  # Router와 연결되는 페이지 컴포넌트
+├── App.vue                 # 공통 헤더, 내비게이션, RouterView
+└── main.js                 # Vue, Pinia, Router, Element Plus 등록
+```
+
+## 컴포넌트 구성
+
+### 공통 컴포넌트
+
+- `BaseDashboardCard`: 대시보드의 공통 카드 레이아웃
+- `UnitToggler`: 섭씨와 화씨 단위 변경
+- `ThemeToggler`: 낮 산책과 밤 산책 모드 변경
+
+### 날씨 컴포넌트
+
+- `WeatherCard`: 지역별 현재 날씨와 멍산책 지수 표시
+- `SearchBar`: 지역명과 한글 초성 검색
+- `CurrentWeatherCard`: 상세 화면의 현재 날씨와 대기질 표시
+- `HourlyForecastCard`: 1시간 단위 날씨 예보 표시
+- `DailyForecastCard`: 5일간의 날씨 예보 표시
+
+### 반려견 컴포넌트
+
+- `DogProfileCard`: 반려견 이름, 크기, 나이대 입력
+- `WalkRecommendationCard`: 멍산책 지수, 추천 시간과 준비사항 표시
+- `DogFactCard`: 랜덤 강아지 사진과 한국어 강아지 상식 표시
+
+## 실행 방법
+
+### 1. 저장소 내려받기
+
+```bash
+git clone https://github.com/SKALA4-jaem/skala-vue.git
+cd skala-vue
+```
+
+### 2. 패키지 설치
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 3. 환경변수 설정
 
-```sh
+프로젝트 최상위 경로에 `.env` 파일을 만들고 발급받은 OpenWeather API 키를 입력합니다.
+
+```env
+VITE_OPENWEATHER_API_KEY=발급받은_API_KEY
+```
+
+`.env` 파일은 `.gitignore`에 등록되어 있으므로 GitHub에 올라가지 않습니다. API 키의 실제 값은 README나 소스 코드에 작성하지 않습니다.
+
+### 4. 개발 서버 실행
+
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
+기본 개발 서버 주소는 `http://localhost:3000`입니다.
 
-```sh
-npm run build
+## 명령어
+
+| 명령어                     | 설명                                     |
+| -------------------------- | ---------------------------------------- |
+| `npm run dev`              | 개발 서버 실행                           |
+| `npm run build`            | 기본 production build 생성               |
+| `npm run build:staging`    | staging 환경으로 build 생성              |
+| `npm run build:production` | production 환경으로 build 생성           |
+| `npm run preview`          | build 결과를 로컬에서 미리 확인          |
+| `npm run lint`             | Oxlint와 ESLint로 코드 검사 및 자동 수정 |
+| `npm run format`           | Prettier로 `src` 내부 코드 정리          |
+
+## Vercel 배포 설정
+
+Vercel에서 프로젝트를 배포할 때 다음 환경변수를 등록해야 합니다.
+
+```text
+Key: VITE_OPENWEATHER_API_KEY
+Value: 발급받은 OpenWeather API 키
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+환경변수를 추가하거나 변경했다면 기존 배포 화면에는 바로 반영되지 않으므로 다시 배포해야 합니다.
 
-```sh
-npm run lint
-```
+## 멍산책 지수 기준
+
+멍산책 지수는 다음 정보를 조합하여 100점에서 감점하는 방식으로 계산합니다.
+
+- 현재 기온 또는 체감온도
+- 비 올 확률
+- 습도
+- 풍속
+- 대기질 단계
+- 반려견의 나이대
+
+메인 지역 카드에서는 빠르게 확인할 수 있는 날씨 정보를 기준으로 계산하고, 상세 화면에서는 체감온도와 대기질을 포함한 더 자세한 정보를 반영합니다.
+
+> 멍산책 지수는 학습 프로젝트에서 제공하는 참고 정보입니다. 실제 산책 여부는 반려견의 건강 상태와 지역의 기상 특보를 함께 확인하여 판단해 주세요.
+
+## 예외 처리
+
+- 일부 지역의 날씨 요청만 실패하면 성공한 지역은 그대로 표시합니다.
+- API 키가 없거나 날씨 요청이 실패하면 안내 메시지를 표시합니다.
+- 대기질 요청 실패 시 날씨 정보는 유지하고 미세먼지만 `확인 중`으로 표시합니다.
+- 강아지 사진이나 상식 요청이 실패하면 대체 안내 문구를 표시합니다.
+- 정의되지 않은 주소는 Not Found 페이지로 이동합니다.
+
+## 프로젝트 목표
+
+- Vue의 반응형 상태와 컴포넌트 구조 이해
+- Props와 Emits를 이용한 컴포넌트 통신
+- Vue Router를 이용한 SPA 페이지 구성
+- Pinia를 이용한 전역 상태 관리
+- Axios를 이용한 외부 API 통신
+- Element Plus를 활용한 UI 구성
+- 환경변수와 production build 이해
+- GitHub와 Vercel을 이용한 배포 경험
