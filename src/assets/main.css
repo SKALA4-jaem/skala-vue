@@ -55,6 +55,7 @@ body[data-theme='night'] #app .dashboard-card,
 body[data-theme='night'] #app .weather-card,
 body[data-theme='night'] #app .detail-card,
 body[data-theme='night'] #app .walk-card,
+body[data-theme='night'] #app .about-card,
 body[data-theme='night'] #app .daily-dog-card,
 body[data-theme='night'] #app .pixel-dog-card,
 body[data-theme='night'] #app .dog-fact-card {
@@ -76,6 +77,26 @@ body[data-theme='night'] #app .hourly-item {
   color: #eee;
   background: #303030;
   border-color: #777;
+}
+
+body[data-theme='night'] #app .about-card p,
+body[data-theme='night'] #app .about-card ul,
+body[data-theme='night'] #app .about-heading > p:last-child {
+  color: #d6d2dc;
+}
+
+body[data-theme='night'] #app .about-card .tech-list > div {
+  color: #f5f5f5;
+  background: #303030;
+  border-color: #777;
+}
+
+body[data-theme='night'] #app .about-card .tech-list dt {
+  color: #fff8ef;
+}
+
+body[data-theme='night'] #app .about-card .tech-list dd {
+  color: #d6d2dc;
 }
 
 body[data-theme='night'] #app .hero-section {
