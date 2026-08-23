@@ -1,35 +1,168 @@
 @import './base.css';
 
+:root {
+  --el-color-primary: #3f3f3f;
+  --el-color-primary-light-3: #666;
+  --el-color-primary-light-5: #888;
+  --el-color-primary-light-7: #bbb;
+  --el-color-primary-light-9: #eee;
+  --el-color-primary-dark-2: #222;
+}
+
+body {
+  min-width: 320px;
+  color: #2f2926;
+  background-color: #fff;
+  background-image: linear-gradient(#ededed 1px, transparent 1px), linear-gradient(90deg, #ededed 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+#app .el-button,
+#app .el-input__wrapper,
+#app .el-select__wrapper,
+#app .el-tag {
+  border-radius: 2px;
+}
+
+#app .el-button {
+  font-weight: 800;
+  box-shadow: 2px 2px 0 #3a312c;
+}
+
+#app .el-button:active {
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+
+body[data-theme='night'] {
+  color: #f5f5f5;
+  background: #171717;
+  background-image: linear-gradient(#292929 1px, transparent 1px), linear-gradient(90deg, #292929 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+body[data-theme='night'] #app .app-header,
+body[data-theme='night'] #app .detail-view,
+body[data-theme='night'] #app .about-view,
+body[data-theme='night'] #app .dog-profile-card,
+body[data-theme='night'] #app .dashboard-card,
+body[data-theme='night'] #app .weather-card,
+body[data-theme='night'] #app .detail-card,
+body[data-theme='night'] #app .walk-card,
+body[data-theme='night'] #app .daily-dog-card,
+body[data-theme='night'] #app .pixel-dog-card,
+body[data-theme='night'] #app .dog-fact-card {
+  color: #f5f5f5;
+  background: #242424;
+  border-color: #777;
+}
+
+body[data-theme='night'] #app .navigation-bar,
+body[data-theme='night'] #app .unit-toggler,
+body[data-theme='night'] #app .profile-result,
+body[data-theme='night'] #app .tip-list,
+body[data-theme='night'] #app .forecast-item,
+body[data-theme='night'] #app .weather-metrics div,
+body[data-theme='night'] #app .about-content,
+body[data-theme='night'] #app .dog-fact-card p,
+body[data-theme='night'] #app .dog-fact-card .dog-photo-area,
+body[data-theme='night'] #app .hourly-item {
+  color: #eee;
+  background: #303030;
+  border-color: #777;
+}
+
+body[data-theme='night'] #app .hero-section {
+  color: #fff;
+  background: #222;
+  border-color: #888;
+}
+
+body[data-theme='night'] #app .brand,
+body[data-theme='night'] #app h1,
+body[data-theme='night'] #app h2,
+body[data-theme='night'] #app h3,
+body[data-theme='night'] #app .city-name,
+body[data-theme='night'] #app .card-heading strong,
+body[data-theme='night'] #app .daily-dog-card strong,
+body[data-theme='night'] #app .walk-content h3,
+body[data-theme='night'] #app .forecast-heading h3,
+body[data-theme='night'] #app .scene-copy strong,
+body[data-theme='night'] #app .dog-fact-card h3,
+body[data-theme='night'] #app .current-temp,
+body[data-theme='night'] #app .weather-card .temperature,
+body[data-theme='night'] #app .weather-metrics dd,
+body[data-theme='night'] #app .status-title,
+body[data-theme='night'] #app .time-note strong,
+body[data-theme='night'] #app .hourly-item strong,
+body[data-theme='night'] #app .hourly-item span,
+body[data-theme='night'] #app .daily-item > strong,
+body[data-theme='night'] #app .daily-item p b,
+body[data-theme='night'] #app .el-progress__text {
+  color: #fff8ef;
+}
+
+body[data-theme='night'] #app .weather-card .walk-metrics strong {
+  color: #fff8ef;
+}
+
+body[data-theme='night'] #app .weather-card .walk-metrics small {
+  color: #c9c3d7;
+}
+
+body[data-theme='night'] #app .hero-section p,
+body[data-theme='night'] #app .card-heading p,
+body[data-theme='night'] #app .daily-dog-card p,
+body[data-theme='night'] #app .weather-status,
+body[data-theme='night'] #app .detail-heading p,
+body[data-theme='night'] #app .profile-form label,
+body[data-theme='night'] #app .profile-note,
+body[data-theme='night'] #app .time-note,
+body[data-theme='night'] #app .scene-copy small,
+body[data-theme='night'] #app .location,
+body[data-theme='night'] #app .weather-metrics dt,
+body[data-theme='night'] #app .weather-metrics dd small,
+body[data-theme='night'] #app .forecast-heading p,
+body[data-theme='night'] #app .hourly-item small,
+body[data-theme='night'] #app .daily-item > span,
+body[data-theme='night'] #app .daily-item > small,
+body[data-theme='night'] #app .daily-item p span {
+  color: #c9c3d7;
+}
+
+body[data-theme='night'] #app .detail-heading span,
+body[data-theme='night'] #app .forecast-heading span,
+body[data-theme='night'] #app .eyebrow {
+  color: #b8b3c2;
+}
+
+body[data-theme='night'] #app .daily-item {
+  border-color: #5f5f5f;
+}
+
+body[data-theme='night'] #app .navigation-bar a {
+  color: #cbc5d8;
+}
+
+body[data-theme='night'] #app .navigation-bar a.router-link-active {
+  color: #fff;
+  background: #555;
+}
+
+body[data-theme='night'] #app .status-bar {
+  color: #fff;
+  background: #333;
+  border-color: #888;
+}
+
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  min-height: 100vh;
   font-weight: normal;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
 }
